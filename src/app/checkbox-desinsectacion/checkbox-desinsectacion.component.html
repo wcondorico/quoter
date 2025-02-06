@@ -1,0 +1,33 @@
+<div class="container">
+  <!-- Checkbox para activar/desactivar los radio buttons -->
+  <label>
+    <input
+      type="checkbox"
+      [checked]="isCheckboxChecked"
+      (change)="onCheckboxChange($event)"
+    />
+    Desinsectación
+  </label>
+
+  <!-- Radio buttons (solo se muestran si el checkbox está activado) -->
+  @if (isCheckboxChecked) { 
+    <div class="radio-group">
+      <label>
+        <input
+          type="radio"
+          name="options"
+          value=87.5
+          [checked]="selectedOption === 87.5"
+          (change)="onRadioChange($event)"
+        />
+        Atomizado + Nebulizado
+      </label>
+    </div>
+  }
+  <!-- Mostrar la opción seleccionada -->
+  @if (selectedOption) {
+  <div class="selected-option">
+    <strong>Opción seleccionada:</strong> {{ selectedOption }}
+  </div>
+  }
+</div>

@@ -1,0 +1,28 @@
+.container {
+  font-family: Arial, sans-serif;
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+}
+
+.radio-group {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.selected-option {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #e0f7fa;
+  border: 1px solid #0097a7;
+  border-radius: 4px;
+  color: #00695c;
+}

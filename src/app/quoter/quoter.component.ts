@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxDesratizacionComponent } from '../checkbox-desratizacion/checkbox-desratizacion.component';
-import { FormatLabelPipe } from '../pipes/format-label.pipe';
+import { CheckboxDesinfeccionComponent } from '../checkbox-desinfeccion/checkbox-desinfeccion.component';
+import { CheckboxDesinsectacionComponent } from '../checkbox-desinsectacion/checkbox-desinsectacion.component';
 
 @Component({
   selector: 'app-quoter',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormatLabelPipe, CheckboxDesratizacionComponent],
+  imports: [CommonModule, ReactiveFormsModule, CheckboxDesratizacionComponent, CheckboxDesinfeccionComponent, CheckboxDesinsectacionComponent],
   templateUrl: './quoter.component.html',
   styleUrl: './quoter.component.scss',
 })
@@ -18,6 +19,8 @@ export class QuoterComponent {
   precioNeto: number = 0;
   precioConIgv: number = 0;
   desratizacionValue: number = 0;
+  desinfeccionValue: number = 0;
+  desinsectacionValue: number = 0;
 
   constructor(private fb: FormBuilder) {
     this.cotizadorForm = this.fb.group({
@@ -53,8 +56,16 @@ export class QuoterComponent {
     this.precioConIgv = this.precioNeto * valores.igv;
   } 
 
-  updateReceived(n: number) {
+  updateDesratizacion(n: number) {
     this.desratizacionValue = n;
+  }
+
+  updateDesinfeccion(n: number) {
+    this.desinfeccionValue = n;
+  }
+
+  updateDesinsectacion(n: number) {
+    this.desinsectacionValue = n;
   }
 
 }

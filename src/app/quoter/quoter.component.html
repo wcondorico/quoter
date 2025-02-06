@@ -1,7 +1,9 @@
 <div class="container">
   <h2 class="title">Cotizador de Servicios</h2>
   <form [formGroup]="cotizadorForm" (ngSubmit)="calcular()">
-    <app-checkbox-desratizacion (sendOption)="updateReceived($event)"></app-checkbox-desratizacion>
+    <app-checkbox-desratizacion (sendOption)="updateDesratizacion($event)"></app-checkbox-desratizacion>
+    <app-checkbox-desinfeccion (sendOption)="updateDesinfeccion($event)"></app-checkbox-desinfeccion>
+    <app-checkbox-desinsectacion (sendOption)="updateDesinsectacion($event)"></app-checkbox-desinsectacion>
 
     <button type="submit" class="btn">Calcular</button>
   </form>
@@ -11,7 +13,9 @@
     <p><strong>Costo Total:</strong> {{ costoTotal | currency:'S/ ':'symbol':'1.2-2' }}</p>
     <p><strong>Precio Neto:</strong> {{ precioNeto | currency:'S/ ':'symbol':'1.2-2' }}</p>
     <p><strong>Precio con IGV:</strong> {{ precioConIgv | currency:'S/ ':'symbol':'1.2-2' }}</p>
-    <p><strong>Valor recibido:</strong> {{ desratizacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+    <p><strong>Valor desratización:</strong> {{ desratizacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+    <p><strong>Valor desinfección:</strong> {{ desinfeccionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+    <p><strong>Valor desinsectación:</strong> {{ desinsectacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
 
   </div>
   
