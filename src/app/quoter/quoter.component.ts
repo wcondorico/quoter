@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CheckboxDesratizacionComponent } from '../checkbox-desratizacion/checkbox-desratizacion.component';
 import { FormatLabelPipe } from '../pipes/format-label.pipe';
 
 @Component({
   selector: 'app-quoter',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormatLabelPipe],
+  imports: [CommonModule, ReactiveFormsModule, FormatLabelPipe, CheckboxDesratizacionComponent],
   templateUrl: './quoter.component.html',
   styleUrl: './quoter.component.scss',
 })
@@ -16,13 +17,11 @@ export class QuoterComponent {
   costoTotal: number = 0;
   precioNeto: number = 0;
   precioConIgv: number = 0;
+  desratizacionValue: number = 0;
 
   constructor(private fb: FormBuilder) {
     this.cotizadorForm = this.fb.group({
       manoObra: [90],
-      desinsectacion: ['clase1'],
-      desratizacionCebo: ['ceboAvena'],
-      desratizacionTrampas: ['beta'],
       DesinfectanteExquat: [15],
       movilidad: [50],
       epp: [41.67],
@@ -52,5 +51,10 @@ export class QuoterComponent {
     const margen = (valores.margen / 100) * this.costoTotal;
     this.precioNeto = this.costoTotal + margen;
     this.precioConIgv = this.precioNeto * valores.igv;
+  } 
+
+  updateReceived(n: number) {
+    this.desratizacionValue = n;
   }
+
 }

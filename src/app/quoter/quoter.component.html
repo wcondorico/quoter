@@ -1,39 +1,8 @@
 <div class="container">
   <h2 class="title">Cotizador de Servicios</h2>
   <form [formGroup]="cotizadorForm" (ngSubmit)="calcular()">
-    <div class="form-group">
-      <label>Desinsectación</label>
-      <div>
-        <input type="radio" formControlName="desinsectacion" value="clase1"> Clase 1 (1.5 litros = 1800 m²)
-        <input type="radio" formControlName="desinsectacion" value="clase2"> Clase 2 (300 mm = 1000 m²)
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Desratización Cebo</label>
-      <div>
-        <input type="radio" formControlName="desratizacionCebo" value="ceboAvena"> Cebo avena maíz
-        <input type="radio" formControlName="desratizacionCebo" value="ceboRodenticida"> Cebo rodenticida
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Desratización Trampas</label>
-      <div>
-        <input type="radio" formControlName="desratizacionTrampas" value="beta"> Beta
-        <input type="radio" formControlName="desratizacionTrampas" value="rejilla"> Rejilla
-        <input type="radio" formControlName="desratizacionTrampas" value="goma"> Goma
-      </div>
-    </div>
-    <div class="form-group" *ngFor="let field of cotizadorForm.controls | keyvalue" [hidden]="
-      field.key === 'desinsectacion' || 
-      field.key === 'desratizacionCebo' || 
-      field.key === 'desratizacionTrampas' ||
-      field.key === 'gastosAdministrativos' ||
-      field.key === 'igv' ||
-      field.key === 'margen'
-    ">
-      <label>{{ field.key | formatLabel }}</label>
-      <input type="number" class="form-control" formControlName="{{ field.key }}">
-    </div>
+    <app-checkbox-desratizacion (sendOption)="updateReceived($event)"></app-checkbox-desratizacion>
+
     <button type="submit" class="btn">Calcular</button>
   </form>
   <div class="results">
@@ -42,5 +11,8 @@
     <p><strong>Costo Total:</strong> {{ costoTotal | currency:'S/ ':'symbol':'1.2-2' }}</p>
     <p><strong>Precio Neto:</strong> {{ precioNeto | currency:'S/ ':'symbol':'1.2-2' }}</p>
     <p><strong>Precio con IGV:</strong> {{ precioConIgv | currency:'S/ ':'symbol':'1.2-2' }}</p>
+    <p><strong>Valor recibido:</strong> {{ desratizacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+
   </div>
+  
 </div>

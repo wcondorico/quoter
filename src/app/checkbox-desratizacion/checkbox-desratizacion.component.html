@@ -1,0 +1,55 @@
+<div class="container">
+  <!-- Checkbox para activar/desactivar los radio buttons -->
+  <label>
+    <input
+      type="checkbox"
+      [checked]="isCheckboxChecked"
+      (change)="onCheckboxChange($event)"
+    />
+    Desratización
+  </label>
+
+  <!-- Radio buttons (solo se muestran si el checkbox está activado) -->
+  @if (isCheckboxChecked) { 
+    <div class="radio-group">
+      <label>
+        <input
+          type="radio"
+          name="options"
+          value=620
+          [checked]="selectedOption === 620"
+          (change)="onRadioChange($event)"
+        />
+        Trampa de rejilla + Cebo natural
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="options"
+          value=607.5
+          [checked]="selectedOption === 607.5"
+          (change)="onRadioChange($event)"
+        />
+        Trampa de rejilla + Rodenticida
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="options"
+          value=465
+          [checked]="selectedOption === 465"
+          (change)="onRadioChange($event)"
+        />
+        Trampa beta + Cebo de goma
+      </label>
+    </div>
+  }
+  <!-- Mostrar la opción seleccionada -->
+  @if (selectedOption) {
+  <div class="selected-option">
+    <strong>Opción seleccionada:</strong> {{ selectedOption }}
+  </div>
+  }
+</div>
