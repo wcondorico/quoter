@@ -30,14 +30,28 @@
     </form>
     <div class="results">
       <h3>Resultados</h3>
+      <p><strong>Total Mano de obra:</strong> {{ manoDeObra | currency:'S/ ':'symbol':'1.2-2' }}</p>
       <p><strong>Total Materiales:</strong> {{ totalMateriales | currency:'S/ ':'symbol':'1.2-2' }}</p>
-      <p><strong>Costo Total:</strong> {{ costoTotal | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      -----------------------------------------------------
+      <p><strong>Valor desratización / 1000:</strong> {{ desratizacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Valor desinfección / 1000:</strong> {{ desinfeccionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Valor desinsectación / 1000:</strong> {{ desinsectacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Valor movilidad:</strong> {{ movilidad | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      -----------------Costos fijos------------------------
+      <p><strong>Costo epp:</strong> {{ cotizadorForm.value.epp | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Costo rupi:</strong> {{ cotizadorForm.value.rupi | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Costo emo:</strong> {{ cotizadorForm.value.emo | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Costo supervision:</strong> {{ cotizadorForm.value.supervision | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Costo contingencia:</strong> {{ cotizadorForm.value.contingencia | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Costo certificado:</strong> {{ cotizadorForm.value.certificado | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Costo baldesGasolinaAceite:</strong> {{ cotizadorForm.value.baldesGasolinaAceite | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Costo depreciacionEquipo:</strong> {{ cotizadorForm.value.depreciacionEquipo | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Costo total costos fijos:</strong> {{ totalCostosFijos | currency:'S/ ':'symbol':'1.2-2' }}</p>
+
+      -----------------------------------------------------
+      <p><strong>Costo Total (adm+obra+mat+fijos):</strong> {{ costoTotal | currency:'S/ ':'symbol':'1.2-2' }}</p>
       <p><strong>Precio Neto:</strong> {{ precioNeto | currency:'S/ ':'symbol':'1.2-2' }}</p>
       <p><strong>Precio con IGV:</strong> {{ precioConIgv | currency:'S/ ':'symbol':'1.2-2' }}</p>
-      <p><strong>Valor movilidad:</strong> {{ movilidad | currency:'S/ ':'symbol':'1.2-2' }}</p>
-      <p><strong>Valor desratización:</strong> {{ desratizacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
-      <p><strong>Valor desinfección:</strong> {{ desinfeccionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
-      <p><strong>Valor desinsectación:</strong> {{ desinsectacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
 
     </div>
   </div>

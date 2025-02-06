@@ -14,7 +14,9 @@ import { CheckboxDesinsectacionComponent } from '../checkbox-desinsectacion/chec
 })
 export class QuoterComponent {
   cotizadorForm: FormGroup;
+  manoDeObra: number = 0;
   totalMateriales: number = 0;
+  totalCostosFijos: number = 266.67;
   movilidad: number = 0;
   costoTotal: number = 0;
   precioNeto: number = 0;
@@ -40,14 +42,15 @@ export class QuoterComponent {
     });
   }
 
-  calcular(): void {
+  calcular() {
     const valores = this.cotizadorForm.value;
-    const manoDeObra = valores.metros <= 1000 ? 90 : (valores.metros*90)/1000; //mano de obra en funcion de los metros
+    this.manoDeObra = valores.metros <= 1000 ? 90 : (valores.metros*90)/1000; //mano de obra en funcion de los metros
     const desratizacion = (valores.metros*this.desratizacionValue)/1000; //precio de desratizacion en funcion de los metros
     const desinsectacion = (valores.metros*this.desinsectacionValue)/1000; //precio de desinsectacion en funcion de los metros
     const desinfeccion = (valores.metros*this.desinfeccionValue)/1000; //precio de desinfeccion en funcion de los metros
     this.totalMateriales = desratizacion + desinsectacion + desinfeccion;
-    this.costoTotal = manoDeObra + this.totalMateriales + this.movilidad + valores.epp + valores.rupi + valores.alquilerMaquina + valores.emo + valores.supervision + valores.contingencia + valores.certificado + valores.baldesGasolinaAceite + valores.depreciacionEquipo;
+    this.totalCostosFijos = valores.epp + valores.rupi + valores.emo + valores.supervision + valores.contingencia + valores.certificado + valores.baldesGasolinaAceite + valores.depreciacionEquipo;
+    this.costoTotal = this.manoDeObra + this.totalMateriales + Number(this.movilidad) + this.totalCostosFijos;
     const gastosAdministrativos = (valores.gastosAdministrativos / 100) * this.costoTotal;
     this.costoTotal += gastosAdministrativos;
     const margen = (valores.margen / 100) * this.costoTotal;
