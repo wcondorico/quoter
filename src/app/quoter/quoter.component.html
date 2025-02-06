@@ -1,22 +1,44 @@
 <div class="container">
   <h2 class="title">Cotizador de Servicios</h2>
-  <form [formGroup]="cotizadorForm" (ngSubmit)="calcular()">
-    <app-checkbox-desratizacion (sendOption)="updateDesratizacion($event)"></app-checkbox-desratizacion>
-    <app-checkbox-desinfeccion (sendOption)="updateDesinfeccion($event)"></app-checkbox-desinfeccion>
-    <app-checkbox-desinsectacion (sendOption)="updateDesinsectacion($event)"></app-checkbox-desinsectacion>
+  <div class="separate">
 
-    <button type="submit" class="btn">Calcular</button>
-  </form>
-  <div class="results">
-    <h3>Resultados</h3>
-    <p><strong>Total Materiales:</strong> {{ totalMateriales | currency:'S/ ':'symbol':'1.2-2' }}</p>
-    <p><strong>Costo Total:</strong> {{ costoTotal | currency:'S/ ':'symbol':'1.2-2' }}</p>
-    <p><strong>Precio Neto:</strong> {{ precioNeto | currency:'S/ ':'symbol':'1.2-2' }}</p>
-    <p><strong>Precio con IGV:</strong> {{ precioConIgv | currency:'S/ ':'symbol':'1.2-2' }}</p>
-    <p><strong>Valor desratización:</strong> {{ desratizacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
-    <p><strong>Valor desinfección:</strong> {{ desinfeccionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
-    <p><strong>Valor desinsectación:</strong> {{ desinsectacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+    <form [formGroup]="cotizadorForm" (ngSubmit)="calcular()">
+      <h2>Servicios</h2>
+      <app-checkbox-desratizacion (sendOption)="updateDesratizacion($event)"></app-checkbox-desratizacion>
+      <app-checkbox-desinfeccion (sendOption)="updateDesinfeccion($event)"></app-checkbox-desinfeccion>
+      <app-checkbox-desinsectacion (sendOption)="updateDesinsectacion($event)"></app-checkbox-desinsectacion>
+      <div class="formGroup">
+        <label>Metros</label>
+        <input type="number" class="form-control" formControlName="metros">
+        <label>
+          <input type="radio" name="locale" value=50 [checked]="movilidad === 50"
+            (change)="onMovilidadChanges($event)" />
+          Lima
+        </label>
+        <label>
+          <input type="radio" name="locale" value=250 [checked]="movilidad === 250"
+            (change)="onMovilidadChanges($event)" />
+          Provincia
+        </label>
+        @if (movilidad) {
+        <div class="selected-movilidad">
+          <strong>Opción seleccionada:</strong> {{ movilidad }}
+        </div>
+        }
+      </div>
+      <button type="submit" class="btn">Calcular</button>
+    </form>
+    <div class="results">
+      <h3>Resultados</h3>
+      <p><strong>Total Materiales:</strong> {{ totalMateriales | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Costo Total:</strong> {{ costoTotal | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Precio Neto:</strong> {{ precioNeto | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Precio con IGV:</strong> {{ precioConIgv | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Valor movilidad:</strong> {{ movilidad | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Valor desratización:</strong> {{ desratizacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Valor desinfección:</strong> {{ desinfeccionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
+      <p><strong>Valor desinsectación:</strong> {{ desinsectacionValue | currency:'S/ ':'symbol':'1.2-2' }}</p>
 
+    </div>
   </div>
-  
 </div>

@@ -15,6 +15,7 @@ import { CheckboxDesinsectacionComponent } from '../checkbox-desinsectacion/chec
 export class QuoterComponent {
   cotizadorForm: FormGroup;
   totalMateriales: number = 0;
+  movilidad: number = 0;
   costoTotal: number = 0;
   precioNeto: number = 0;
   precioConIgv: number = 0;
@@ -24,12 +25,9 @@ export class QuoterComponent {
 
   constructor(private fb: FormBuilder) {
     this.cotizadorForm = this.fb.group({
-      manoObra: [90],
-      DesinfectanteExquat: [15],
-      movilidad: [50],
+      metros: [1000],
       epp: [41.67],
       rupi: [40],
-      alquilerMaquina: [0],
       emo: [20],
       supervision: [0],
       contingencia: [100],
@@ -44,11 +42,12 @@ export class QuoterComponent {
 
   calcular(): void {
     const valores = this.cotizadorForm.value;
-    const desinsectacionCost = valores.desinsectacion === 'clase1' ? 80 : 95;
-    const desratizacionCeboCost = valores.desratizacionCebo === 'ceboAvena' ? 20 : 7.5;
-    const desratizacionTrampasCost = valores.desratizacionTrampas === 'beta' ? 25 : valores.desratizacionTrampas === 'rejilla' ? 40 : 6;
-    this.totalMateriales = desinsectacionCost + desratizacionCeboCost + desratizacionTrampasCost;
-    this.costoTotal = valores.manoObra + this.totalMateriales + valores.movilidad + valores.epp + valores.rupi + valores.alquilerMaquina + valores.emo + valores.supervision + valores.contingencia + valores.certificado + valores.baldesGasolinaAceite + valores.depreciacionEquipo;
+    const manoDeObra = valores.metros <= 1000 ? 90 : (valores.metros*90)/1000; //mano de obra en funcion de los metros
+    const desratizacion = (valores.metros*this.desratizacionValue)/1000; //precio de desratizacion en funcion de los metros
+    const desinsectacion = (valores.metros*this.desinsectacionValue)/1000; //precio de desinsectacion en funcion de los metros
+    const desinfeccion = (valores.metros*this.desinfeccionValue)/1000; //precio de desinfeccion en funcion de los metros
+    this.totalMateriales = desratizacion + desinsectacion + desinfeccion;
+    this.costoTotal = manoDeObra + this.totalMateriales + this.movilidad + valores.epp + valores.rupi + valores.alquilerMaquina + valores.emo + valores.supervision + valores.contingencia + valores.certificado + valores.baldesGasolinaAceite + valores.depreciacionEquipo;
     const gastosAdministrativos = (valores.gastosAdministrativos / 100) * this.costoTotal;
     this.costoTotal += gastosAdministrativos;
     const margen = (valores.margen / 100) * this.costoTotal;
@@ -68,4 +67,7 @@ export class QuoterComponent {
     this.desinsectacionValue = n;
   }
 
+  onMovilidadChanges(event: any) {
+    this.movilidad = event.target.value;
+  }
 }
